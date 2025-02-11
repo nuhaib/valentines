@@ -9,3 +9,34 @@ const moveRandom = document.querySelector("#move-random");
 moveRandom.addEventListener("mouseenter", function (e) {
   moveRandomEl(e.target);
 });
+
+// Background Music with Smooth Fade-In
+document.addEventListener("DOMContentLoaded", function () {
+    let audio = document.createElement("audio");
+    audio.id = "background-music";
+    audio.loop = true;
+    audio.volume = 0.0; // Start muted to avoid autoplay restrictions
+
+    let source = document.createElement("source");
+    source.src = "assets/TeenageDream.mp3";
+    source.type = "audio/mpeg";
+    
+    audio.appendChild(source);
+    document.body.appendChild(audio);
+
+    // Play only after user interaction
+    document.body.addEventListener("click", function () {
+        if (audio.paused) {
+            audio.play();
+            let volume = 0.0;
+            let fadeIn = setInterval(function () {
+                if (volume < 1.0) {
+                    volume += 0.05; // Adjust fade speed
+                    audio.volume = volume.toFixed(2);
+                } else {
+                    clearInterval(fadeIn);
+                }
+            }, 200);
+        }
+    }, { once: true }); // Ensures it triggers only once
+});
