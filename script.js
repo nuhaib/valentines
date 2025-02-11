@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     audio.volume = 0.0; // Start muted to avoid autoplay restrictions
 
     let source = document.createElement("source");
-    source.src = "assets/TeenageDream.mp3"; // Ensure the path is correct
+    source.src = "assets/teenage_dream.mp3"; // Corrected file name
     source.type = "audio/mpeg";
     
     audio.appendChild(source);
