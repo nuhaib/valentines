@@ -25,19 +25,26 @@ document.addEventListener("DOMContentLoaded", function () {
   audio.appendChild(source);
   document.body.appendChild(audio);
 
-  // Ensure audio loads properly
-  audio.load();
+  // Create an invisible start button to bypass autoplay restrictions
+  let startButton = document.createElement("button");
+  startButton.style.display = "none";
+  document.body.appendChild(startButton);
 
-  // Play the music and apply a smooth fade-in effect
-  audio.play().then(() => {
-    let volume = 0.0;
-    let fadeIn = setInterval(function () {
-      if (volume < 1.0) {
-        volume += 0.05; // Adjust fade speed
-        audio.volume = volume.toFixed(2);
-      } else {
-        clearInterval(fadeIn);
-      }
-    }, 200);
-  }).catch(error => console.log("Autoplay blocked:", error));
+  // Add an event listener to trigger the music once the page is loaded
+  startButton.addEventListener("click", function () {
+    audio.play().then(() => {
+      let volume = 0.0;
+      let fadeIn = setInterval(function () {
+        if (volume < 1.0) {
+          volume += 0.05; // Adjust fade speed
+          audio.volume = volume.toFixed(2);
+        } else {
+          clearInterval(fadeIn);
+        }
+      }, 200);
+    }).catch(error => console.log("Autoplay blocked:", error));
+  });
+
+  // Trigger the click event of the invisible button immediately
+  startButton.click();
 });
