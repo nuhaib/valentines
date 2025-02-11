@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Check if audio has already been created (check localStorage)
-    if (!sessionStorage.getItem("audioCreated")) {
-        // Create the audio element for the first time
+    // Check if audio element already exists in localStorage
+    if (!localStorage.getItem("audioCreated")) {
+        // Create the audio element on the first visit
         let audio = document.createElement("audio");
         audio.id = "background-music";
         audio.loop = true;
@@ -10,12 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
         let source = document.createElement("source");
         source.src = "assets/teenage_dream.mp3"; // Corrected file name
         source.type = "audio/mpeg";
-        
+
         audio.appendChild(source);
         document.body.appendChild(audio);
 
-        // Set sessionStorage to remember that audio has been created
-        sessionStorage.setItem("audioCreated", "true");
+        // Mark audio as created in localStorage to persist across pages
+        localStorage.setItem("audioCreated", "true");
 
         // Start the music with fade-in effect
         const startMusic = () => {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
             startMusic();
         }
     } else {
-        // If the audio element already exists, we can directly play it
+        // If audio already exists in localStorage, just play it
         let audio = document.getElementById("background-music");
         if (audio.paused) {
             audio.play().catch(error => console.log("Autoplay blocked:", error));
