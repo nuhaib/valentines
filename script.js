@@ -32,11 +32,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Check if we're on the 4th page, add event listener to "Yes" button
+    // On the 4th page, the "Yes" button should start music
     if (document.body.contains(document.querySelector("#yes-button"))) {
         const yesButton = document.querySelector("#yes-button");
-        yesButton.addEventListener("click", function() {
-            startMusic();  // Start music on "Yes" click
+        yesButton.addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default link action (navigation)
+            startMusic(); // Start the music
+            window.location.href = "yes.html"; // Redirect to the final page
         });
     }
 });
