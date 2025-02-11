@@ -12,7 +12,6 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #ffe5e5;
-  overflow: hidden; /* Hide overflow to avoid scrollbars from animations */
 }
 
 .container {
@@ -36,47 +35,9 @@ body {
 
 .btn a {
   text-decoration: none;
-  color: #fff;
-  background: #ff5c8e;
+  color: #111;
+  background: #fff;
   padding: 10px 25px;
   border-radius: 8px;
   box-shadow: 0.5rem 1rem 3rem hsl(0, 0%, 0%, 0.3);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn a:hover {
-  background-color: #ff3385;
-  transform: scale(1.05);
-}
-
-/* Add animation for subtle floating hearts or sparkles */
-@keyframes floatHearts {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-/* Example of floating effect */
-.container h1 {
-  animation: floatHearts 3s ease-in-out infinite;
-}
-
-/* Add a smooth background fade-in effect */
-body {
-  animation: fadeInBackground 3s ease-in-out;
-}
-
-@keyframes fadeInBackground {
-  0% {
-    background-color: #ffe5e5;
-  }
-  100% {
-    background-color: #f0d0d0;
-  }
 }
