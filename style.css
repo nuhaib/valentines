@@ -35,9 +35,13 @@ body {
 
 .btn a {
   text-decoration: none;
-  color: #111;
-  background: #fff;
+  color: #fff; /* Text color of the buttons */
+  background: #ff5e57; /* Button color (light red) */
   padding: 10px 25px;
   border-radius: 8px;
   box-shadow: 0.5rem 1rem 3rem hsl(0, 0%, 0%, 0.3);
+}
+
+.btn a:hover {
+  background-color: #ff7f7b; /* Slightly lighter red for hover effect */
 }
