@@ -4,13 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
         startMusic();
     }
 
-    // Disable "No" button interaction (but keep hover effect)
+    // "No" button should still have hover effect but no navigation
     const noButton = document.querySelector("#move-random");
     if (noButton) {
         noButton.addEventListener("click", function (e) {
-            e.preventDefault(); // Prevent the default behavior (navigation)
-            // Optionally, you can display a message or handle the "No" action here
-            alert("You can only click 'Yes' to proceed!");
+            e.preventDefault(); // Prevent the default navigation behavior
+            // Prevent navigation but allow hover effect
+            console.log("You can only click 'Yes' to proceed!");
         });
     }
 
