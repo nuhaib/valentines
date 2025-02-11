@@ -32,14 +32,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Add event listener to the "Yes" button on 4th page
-    const yesButton = document.querySelector("#yes-button");
-    if (yesButton) {
+    // Check if we're on the 4th page, add event listener to "Yes" button
+    if (document.body.contains(document.querySelector("#yes-button"))) {
+        const yesButton = document.querySelector("#yes-button");
         yesButton.addEventListener("click", function() {
             startMusic();  // Start music on "Yes" click
         });
     }
-
 });
 
 // Move button when hovered (Random movement)
