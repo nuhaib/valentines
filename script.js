@@ -8,14 +8,14 @@ document.addEventListener("DOMContentLoaded", function () {
     let source = document.createElement("source");
     source.src = "assets/teenage_dream.mp3"; // Corrected file name
     source.type = "audio/mpeg";
-    
+
     audio.appendChild(source);
     document.body.appendChild(audio);
 
     // Ensure audio loads properly
     audio.load();
 
-    // Add a user interaction event for autoplay
+    // Function to start music on "Yes" button click
     function startMusic() {
         if (audio.paused) {
             audio.play().then(() => {
@@ -32,26 +32,27 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Only start the music when the "Yes" button is clicked on the 4th page
-    const yesButton = document.querySelector(".btn a"); // Adjust if needed
+    // Add event listener to the "Yes" button on 4th page
+    const yesButton = document.querySelector("#yes-button");
     if (yesButton) {
-        yesButton.addEventListener("click", function () {
-            startMusic(); // Start the music when "Yes" is clicked
+        yesButton.addEventListener("click", function() {
+            startMusic();  // Start music on "Yes" click
         });
     }
+
 });
 
 // Move button when hovered (Random movement)
 function moveRandomEl(elm) {
-  elm.style.position = "absolute";
-  elm.style.top = Math.floor(Math.random() * 90 + 5) + "%";
-  elm.style.left = Math.floor(Math.random() * 90 + 5) + "%";
+    elm.style.position = "absolute";
+    elm.style.top = Math.floor(Math.random() * 90 + 5) + "%";
+    elm.style.left = Math.floor(Math.random() * 90 + 5) + "%";
 }
 
 const moveRandom = document.querySelector("#move-random");
 
 if (moveRandom) {
-  moveRandom.addEventListener("mouseenter", function (e) {
-    moveRandomEl(e.target);
-  });
+    moveRandom.addEventListener("mouseenter", function (e) {
+        moveRandomEl(e.target);
+    });
 }
