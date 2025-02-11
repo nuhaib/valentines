@@ -28,23 +28,16 @@ document.addEventListener("DOMContentLoaded", function () {
   // Ensure audio loads properly
   audio.load();
 
-  // Add a user interaction event for autoplay
-  function startMusic() {
-    if (audio.paused) {
-      audio.play().then(() => {
-        let volume = 0.0;
-        let fadeIn = setInterval(function () {
-          if (volume < 1.0) {
-            volume += 0.05; // Adjust fade speed
-            audio.volume = volume.toFixed(2);
-          } else {
-            clearInterval(fadeIn);
-          }
-        }, 200);
-      }).catch(error => console.log("Autoplay blocked:", error));
-    }
-  }
-
-  // Listen for user interaction (click/touch) to start music
-  document.body.addEventListener("click", startMusic, { once: true });
+  // Play the music and apply a smooth fade-in effect
+  audio.play().then(() => {
+    let volume = 0.0;
+    let fadeIn = setInterval(function () {
+      if (volume < 1.0) {
+        volume += 0.05; // Adjust fade speed
+        audio.volume = volume.toFixed(2);
+      } else {
+        clearInterval(fadeIn);
+      }
+    }, 200);
+  }).catch(error => console.log("Autoplay blocked:", error));
 });
