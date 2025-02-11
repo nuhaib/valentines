@@ -18,25 +18,32 @@ document.addEventListener("DOMContentLoaded", function () {
     audio.volume = 0.0; // Start muted to avoid autoplay restrictions
 
     let source = document.createElement("source");
-    source.src = "assets/TeenageDream.mp3";
+    source.src = "assets/TeenageDream.mp3"; // Ensure the path is correct
     source.type = "audio/mpeg";
     
     audio.appendChild(source);
     document.body.appendChild(audio);
 
-    // Play only after user interaction
-    document.body.addEventListener("click", function () {
+    // Ensure audio loads properly
+    audio.load();
+
+    // Add a user interaction event for autoplay
+    function startMusic() {
         if (audio.paused) {
-            audio.play();
-            let volume = 0.0;
-            let fadeIn = setInterval(function () {
-                if (volume < 1.0) {
-                    volume += 0.05; // Adjust fade speed
-                    audio.volume = volume.toFixed(2);
-                } else {
-                    clearInterval(fadeIn);
-                }
-            }, 200);
+            audio.play().then(() => {
+                let volume = 0.0;
+                let fadeIn = setInterval(function () {
+                    if (volume < 1.0) {
+                        volume += 0.05; // Adjust fade speed
+                        audio.volume = volume.toFixed(2);
+                    } else {
+                        clearInterval(fadeIn);
+                    }
+                }, 200);
+            }).catch(error => console.log("Autoplay blocked:", error));
         }
-    }, { once: true }); // Ensures it triggers only once
+    }
+
+    // Listen for user interaction (click/touch) to start music
+    document.body.addEventListener("click", startMusic, { once: true });
 });
