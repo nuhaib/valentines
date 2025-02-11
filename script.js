@@ -1,17 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let audio = document.createElement("audio");
-    audio.id = "background-music";
-    audio.loop = true;
-    audio.volume = 0.0; // Start muted to avoid autoplay restrictions
+    // Check if audio element already exists, if not, create it
+    let audio = document.getElementById("background-music");
+    if (!audio) {
+        audio = document.createElement("audio");
+        audio.id = "background-music";
+        audio.loop = true;
+        audio.volume = 0.0; // Start muted to avoid autoplay restrictions
 
-    let source = document.createElement("source");
-    source.src = "assets/teenage_dream.mp3"; // Corrected file name
-    source.type = "audio/mpeg";
-    
-    audio.appendChild(source);
-    document.body.appendChild(audio);
+        let source = document.createElement("source");
+        source.src = "assets/teenage_dream.mp3"; // Corrected file name
+        source.type = "audio/mpeg";
+        
+        audio.appendChild(source);
+        document.body.appendChild(audio);
+    }
 
-    // Invisible interaction (e.g., simulate a click or touch)
+    // Start audio with fade-in effect
     const startMusic = () => {
         audio.play().then(() => {
             let volume = 0.0;
@@ -26,19 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }).catch(error => console.log("Autoplay blocked:", error));
     };
 
-    // Create a small invisible div that simulates a click
-    let invisibleDiv = document.createElement("div");
-    invisibleDiv.style.position = "absolute";
-    invisibleDiv.style.width = "1px";
-    invisibleDiv.style.height = "1px";
-    invisibleDiv.style.top = "0px";
-    invisibleDiv.style.left = "0px";
-    invisibleDiv.style.zIndex = "-1"; // Make it invisible
-    document.body.appendChild(invisibleDiv);
-
-    // Trigger the music play by simulating a click on the invisible div
-    invisibleDiv.addEventListener("click", startMusic);
-
-    // Automatically simulate the "click" to start music
-    invisibleDiv.click();
+    // If audio isn't playing, try to start it
+    if (audio.paused) {
+        startMusic();
+    }
 });
