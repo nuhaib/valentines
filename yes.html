@@ -5,7 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>For My Love</title>
-
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
@@ -27,27 +26,50 @@
         async
         src="https://tenor.com/embed.js"
       ></script>
-      <h1>Hehehehe, I knew it! 🥺 Happy Valentine's My Love ❤️ I Love You Always Forever 💜</h1>
+      <h1>Hehehehe, I knew it! 😘 I Love You Always Forever 💜</h1>
     </div>
 
-    <!-- Music Audio -->
-    <audio id="background-music" loop>
-      <source src="assets/teenage_dream.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-
     <script>
-      // Music plays automatically on this page if triggered by the 4th page
-      document.addEventListener("DOMContentLoaded", function () {
-        if (localStorage.getItem("playMusic") === "true") {
-          const music = document.getElementById("background-music");
-          music.volume = 0.3;  // Set volume
-          music.play().catch(error => console.log("Autoplay blocked:", error));
+      // Check if the music flag is set in localStorage
+      if (localStorage.getItem('playMusic') === 'true') {
+        // Background Music with Smooth Fade-In
+        document.addEventListener("DOMContentLoaded", function () {
+          let audio = document.createElement("audio");
+          audio.id = "background-music";
+          audio.loop = true;
+          audio.volume = 0.0; // Start muted to avoid autoplay restrictions
 
-          // Clear the flag after music starts playing
-          localStorage.removeItem("playMusic");
-        }
-      });
+          let source = document.createElement("source");
+          source.src = "assets/teenage_dream.mp3"; // Corrected file name
+          source.type = "audio/mpeg";
+
+          audio.appendChild(source);
+          document.body.appendChild(audio);
+
+          // Ensure audio loads properly
+          audio.load();
+
+          // Add a user interaction event for autoplay
+          function startMusic() {
+            if (audio.paused) {
+              audio.play().then(() => {
+                let volume = 0.0;
+                let fadeIn = setInterval(function () {
+                  if (volume < 1.0) {
+                    volume += 0.05; // Adjust fade speed
+                    audio.volume = volume.toFixed(2);
+                  } else {
+                    clearInterval(fadeIn);
+                  }
+                }, 200);
+              }).catch(error => console.log("Autoplay blocked:", error));
+            }
+          }
+
+          // Start music immediately on final page load
+          startMusic();
+        });
+      }
     </script>
   </body>
 </html>
