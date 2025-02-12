@@ -1,3 +1,4 @@
+<!-- yes.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,6 +30,24 @@
       <h1>Hehehehe, I knew it! 🥺 Happy Valentine's My Love ❤️ I Love You Always Forever 💜</h1>
     </div>
 
-    <script src="./script.js"></script>
+    <!-- Music Audio -->
+    <audio id="background-music" loop>
+      <source src="assets/teenage_dream.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <script>
+      // Music plays automatically on this page if triggered by the 4th page
+      document.addEventListener("DOMContentLoaded", function () {
+        if (localStorage.getItem("playMusic") === "true") {
+          const music = document.getElementById("background-music");
+          music.volume = 0.3;  // Set volume
+          music.play().catch(error => console.log("Autoplay blocked:", error));
+
+          // Clear the flag after music starts playing
+          localStorage.removeItem("playMusic");
+        }
+      });
+    </script>
   </body>
 </html>
