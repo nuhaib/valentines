@@ -1,3 +1,4 @@
+<!-- no3.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,11 +34,19 @@
       <h1>Man jao na! Kitna bhav khaoga 😭</h1>
 
       <div class="btn">
-        <a href="yes.html">Yes</a>
+        <a href="yes.html" id="yes-button">Yes</a>
         <a href="#" id="move-random">No</a>
       </div>
     </div>
 
-    <script src="./script.js"></script>
+    <script>
+      // Set flag in localStorage when the Yes button is clicked
+      const yesButton = document.getElementById("yes-button");
+      if (yesButton) {
+        yesButton.addEventListener("click", function () {
+          localStorage.setItem("playMusic", "true");
+        });
+      }
+    </script>
   </body>
 </html>
