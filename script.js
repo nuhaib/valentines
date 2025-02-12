@@ -6,9 +6,20 @@ function moveRandomEl(elm) {
 
 const moveRandom = document.querySelector("#move-random");
 
-moveRandom.addEventListener("mouseenter", function (e) {
-  moveRandomEl(e.target);
+if (moveRandom) {
+  moveRandom.addEventListener("mouseenter", function (e) {
+    moveRandomEl(e.target);
+  });
+}
+
+// Music controls: auto-play on yes.html (the final page)
+document.addEventListener("DOMContentLoaded", function () {
+  // Check if we're on the yes.html page
+  if (window.location.pathname.endsWith("yes.html")) {
+    const music = document.getElementById("background-music");
+    if (music) {
+      music.volume = 0.3;  // Set volume
+      music.play().catch(error => console.log("Autoplay blocked:", error));
+    }
+  }
 });
-// Music controls
-const music = document.getElementById("background-music");
-music.volume = 0.3;  // Set volume
